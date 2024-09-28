@@ -35,6 +35,8 @@ INSTALLED_APPS = [
 	'index',
 	'teacher',
 	'subject',
+	'student',
+	'tests',
 	'rest_framework',
 	'rest_framework_simplejwt',
 	'corsheaders',
