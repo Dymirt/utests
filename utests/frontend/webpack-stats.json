@@ -1,0 +1,21 @@
+{
+  "status": "done",
+  "assets": {
+    "bundle.js": {
+      "name": "bundle.js",
+      "path": "/Users/dmytrokolida/utests/utests/frontend/build/bundle.js",
+      "publicPath": "http://127.0.0.1:3000/bundle.js"
+    },
+    "node_modules_web-vitals_dist_web-vitals_js.bundle.js": {
+      "name": "node_modules_web-vitals_dist_web-vitals_js.bundle.js",
+      "path": "/Users/dmytrokolida/utests/utests/frontend/build/node_modules_web-vitals_dist_web-vitals_js.bundle.js",
+      "publicPath": "http://127.0.0.1:3000/node_modules_web-vitals_dist_web-vitals_js.bundle.js"
+    }
+  },
+  "chunks": {
+    "main": [
+      "bundle.js"
+    ]
+  },
+  "publicPath": "http://127.0.0.1:3000/"
+}
