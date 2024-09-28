@@ -1,22 +1,35 @@
-import logo from './logo.svg';
+// App.js
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Landing from './Landing';  
+import Login from './Login';
+import SignUp from './SignUp';
+import logo from './logo1.svg';
 
 function App() {
-	const [data, setData] = useState(null);
+  return (
+    <Router>
+      <div>
+        <header class="header">
+			<div class="logo-cont flex_center">
+				<img src={logo}/>
+			</div>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </nav>
+        </header>
 
-	useEffect(() => {
-	  fetch('http://127.0.0.1:8000/api/data/')
-		.then(response => response.json())
-		.then(data => setData(data));
-	}, []);
-
-	return (
-	  <div>
-		<h1>React App</h1>
-		{data ? <p>{data.message}</p> : <p>Loading...</p>}
-	  </div>
-	);
-  }
+        <Routes>
+          <Route path="/" element={<Landing />} />  
+          <Route path="/login" element={<Login />} />   
+          <Route path="/signup" element={<SignUp />} />  
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
 export default App;
