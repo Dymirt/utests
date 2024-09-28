@@ -33,7 +33,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 	'index',
+	'teacher',
+	'subject',
 	'rest_framework',
+	'rest_framework_simplejwt',
 	'corsheaders',
 	'webpack_loader',
     'django.contrib.admin',
@@ -47,6 +50,12 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
 	'corsheaders.middleware.CorsMiddleware',
