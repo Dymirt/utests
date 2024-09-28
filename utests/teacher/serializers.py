@@ -12,7 +12,7 @@ class TeacherRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Teacher
-        fields = ['username', 'password', 'name']
+        fields = ['username', 'password', 'email']
 
     def validate_username(self, value):
         if User.objects.filter(username=value).exists():
