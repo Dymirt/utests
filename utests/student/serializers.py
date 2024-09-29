@@ -1,14 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Teacher
-from subject.models import Subject
+from .models import Student
 
-class TeacherRegistrationSerializer(serializers.ModelSerializer):
+class StudentRegistrationSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     password = serializers.CharField(write_only=True, source='user.password')
 
     class Meta:
-        model = Teacher
+        model = Student
         fields = ['username', 'password', 'email']
 
     def validate_username(self, value):
@@ -19,23 +18,17 @@ class TeacherRegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = User.objects.create_user(**user_data)
-        teacher = Teacher.objects.create(user=user, **validated_data)
-        return teacher
+        student = Student.objects.create(user=user, **validated_data)
+        return student
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email']
 
-class SubjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subject
-        fields = ['name', 'code']
-
-class TeacherSerializer(serializers.ModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    subjects = SubjectSerializer(many=True)
 
     class Meta:
-        model = Teacher
-        fields = ['user', 'email', 'subjects']
+        model = Student
+        fields = ['user', 'email']
