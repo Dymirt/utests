@@ -1,104 +1,90 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  // State variables for email, username, and password
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
+  // Initialize useNavigate for navigation
+  const navigate = useNavigate(); 
 
-  const [errorMessage, setErrorMessage] = useState('');
+ 
+  const handleSubmit = (event) => {
+    event.preventDefault();  
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+ 
+    const url = 'http://127.0.0.1:8000/teacher/api/register/';
 
-    // Clear the error message on input change
-    setErrorMessage('');
-  };
+ 
+    const params = {
+      email: email,
+      username: username,
+      password: password,
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Example validation
-    if (formData.email === '' || formData.password === '') {
-      setErrorMessage('Both fields are required.');
-      return;
-    }
-
-    console.log('Login Data:', formData);
-    // Handle login logic here
+ 
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // Set the content type to JSON
+      },
+      body: JSON.stringify(params), // Convert params object to a JSON string
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json(); // Parse the JSON response
+      })
+      .then((data) => {
+        console.log('Response from API:', data);
+        // Check if the registration was successful
+        if (data.success) { // Assuming your API returns a 'success' field
+          navigate('/signup'); // Redirect to signup page
+        } else {
+ 
+          console.error('Registration failed:', data.message);
+        }
+      })
+      .catch((error) => {
+        console.error('Error during API call:', error);  
+      });
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-100 mt-8">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">Sign in</h1>
-
-        <form onSubmit={handleSubmit}>
-          {/* Email Input */}
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">Email:</label>
-            <input 
-              type="email" 
-              name="email"
-              id="email"
-              placeholder="Enter your email" 
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-              required
-            />
-          </div>
-          
-          {/* Password Input */}
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">Password:</label>
-            <input 
-              type="password" 
-              name="password"
-              id="password"
-              placeholder="Enter your password" 
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-              required
-            />
-          </div>
-
-          {/* Checkbox Section */}
-          <div className="flex items-center mb-4">
-            <input 
-              type="checkbox" 
-              id="remember-me" 
-              className="mr-2"
-            />
-            <label htmlFor="remember-me" className="text-sm text-gray-700">Keep me logged in</label>
-          </div>
-          
-          {/* Error Message */}
-          {errorMessage && (
-            <div className="mb-4 text-red-600 text-sm text-center">
-              {errorMessage}
-            </div>
-          )}
-
-          <button 
-            type="submit" 
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
-            Continue
-          </button>
-          
-          <div className="mt-4 text-center text-sm">
-            <p className="text-gray-600">Don't have an account? 
-              <a href="/signup" className="text-blue-500 hover:underline"> Register now</a>
-            </p>
-          </div>
-        </form>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
       </div>
-    </div>
+      <div>
+        <label>username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Register</button> 
+    </form>
   );
 };
 
-export default Login;
+export default Login;  

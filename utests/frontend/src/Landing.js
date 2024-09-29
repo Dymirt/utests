@@ -29,7 +29,6 @@ const Landing = () => {
         Sign Up Now
       </button>
     </div>
-
     <div class="md:w-1/2 flex justify-center items-center mt-4 md:mt-0">
       <img class="rounded-lg w-3/4 md:w-7/12" src={backImg} alt="Background Image" />
     </div>

@@ -21,7 +21,6 @@ function App() {
               <Link to="/signup" class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-700 md:text-[16px]">Sign Up</Link>
             </nav>
           </header>
-
           <Routes>
             <Route path="/" element={<Landing />} />  
             <Route path="/login" element={<Login />} />   
