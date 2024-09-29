@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* App.css */
 body {
   font-family: Arial, sans-serif;
@@ -85,6 +88,6 @@ form label {
 
 .home_section{
   height: 60vh;
-  background-color: var(--second-color);
+  background-color: #F9F7F5;
   color: white;
 }
