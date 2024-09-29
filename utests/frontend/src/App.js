@@ -13,12 +13,13 @@ function App() {
       <div>
         <header class="header">
 			<div class="logo-cont flex_center">
-				<img src={logo}/>
+				
+				<Link to="/"><img src={logo}/></Link>
 			</div>
           <nav>
             <Link to="/">Home</Link>
             <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/signup">Signup</Link>
           </nav>
         </header>
 
